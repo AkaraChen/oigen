@@ -1,13 +1,9 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "oigen"
 version = "0.1.0"
 description = "OI/ACM test data generation framework with stress testing support"
 readme = "README.md"
-license = "MIT"
+license = { text = "MIT" }
 requires-python = ">=3.10"
 authors = [
     { name = "oigen contributors" }
@@ -24,17 +20,21 @@ classifiers = [
     "Topic :: Software Development :: Testing",
 ]
 dependencies = [
-    "rich>=13.0.0",
+    "rich>=14.0.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
+    "pytest>=9.0.0",
+    "pytest-cov>=7.0.0",
 ]
 
-[tool.hatch.build.targets.wheel]
-packages = ["oigen"]
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
