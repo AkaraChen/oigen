@@ -7,7 +7,7 @@ from oigen import workflow, Graph, Int
 @workflow
 def graph_data():
     """Generate a random undirected graph."""
-    return Graph(n=Int(5, 10), m=Int(5, 15))
+    return Graph(n=Int(5, 10), m=Int(5, 10))
 
 
 @workflow
