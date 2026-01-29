@@ -2,19 +2,18 @@
 Tests for oigen.workflow module.
 """
 
-from pathlib import Path
 from random import Random
 from unittest.mock import patch
 
 import pytest
 
 from oigen.errors import WorkflowError
-from oigen.generators import BaseGenerator, Int, Sequence
-from oigen.generators.tree import Tree, TreeData
-from oigen.generators.graph import Graph, GraphData
+from oigen.generators import Int, Sequence
+from oigen.generators.graph import Graph
+from oigen.generators.tree import Tree
 from oigen.workflow import (
-    default_formatter,
     Workflow,
+    default_formatter,
     workflow,
 )
 

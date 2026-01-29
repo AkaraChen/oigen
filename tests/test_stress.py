@@ -2,22 +2,21 @@
 Tests for oigen.stress module.
 """
 
-from pathlib import Path
-from random import Random
-from unittest.mock import patch, MagicMock
 import subprocess
+from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 import pytest
 
 from oigen.errors import StressTestError
 from oigen.generators import Int
-from oigen.workflow import Workflow
 from oigen.stress import (
     StressResult,
+    StressTest,
     _normalize_output,
     _run_executable,
-    StressTest,
 )
+from oigen.workflow import Workflow
 
 
 class TestStressResult:

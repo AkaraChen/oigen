@@ -2,24 +2,21 @@
 Tests for oigen.output module.
 """
 
-from io import StringIO
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
-import pytest
-from rich.console import Console as RichConsole
 from rich.progress import Progress
 from rich.table import Table
 
 from oigen.output import (
-    Verbosity,
     Console,
+    Verbosity,
     console,
+    debug,
     error,
+    info,
+    set_verbosity,
     success,
     warning,
-    info,
-    debug,
-    set_verbosity,
 )
 
 

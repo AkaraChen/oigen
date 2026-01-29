@@ -4,32 +4,31 @@ Tests for oigen.decorators.tree module.
 
 import pytest
 
+from oigen.decorators.base import ConstraintRegistry, get_constraints
+from oigen.decorators.tree import (
+    CentroidConstraint,
+    DepthConstraint,
+    DiameterConstraint,
+    EdgeWeightConstraint,
+    NodeWeightConstraint,
+    with_centroid,
+    with_depth,
+    with_diameter,
+    with_edge_weight,
+    with_node_weight,
+)
 from oigen.errors import ConstraintError
 from oigen.generators import Int
 from oigen.generators.tree import Tree
-from oigen.decorators.base import get_constraints
-from oigen.decorators.tree import (
-    NodeWeightConstraint,
-    EdgeWeightConstraint,
-    DiameterConstraint,
-    CentroidConstraint,
-    DepthConstraint,
-    with_node_weight,
-    with_edge_weight,
-    with_diameter,
-    with_centroid,
-    with_depth,
-)
 
 
 class TestNodeWeightConstraint:
     def test_validate_valid(self):
         c = NodeWeightConstraint(generator=Int(1, 10))
-        c.validate(Tree(n=5), get_constraints(lambda: Tree(n=5)) or __import__('oigen.decorators.base', fromlist=['ConstraintRegistry']).ConstraintRegistry())
+        c.validate(Tree(n=5), ConstraintRegistry())
 
     def test_validate_invalid_generator(self):
         c = NodeWeightConstraint(generator=42)  # type: ignore
-        from oigen.decorators.base import ConstraintRegistry
         with pytest.raises(ConstraintError) as exc_info:
             c.validate(Tree(n=5), ConstraintRegistry())
         assert "generator must be a BaseGenerator" in str(exc_info.value)

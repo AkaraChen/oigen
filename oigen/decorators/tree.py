@@ -9,7 +9,6 @@ from oigen.decorators.base import Constraint, ConstraintRegistry, add_constraint
 from oigen.errors import ConstraintError
 from oigen.generators import BaseGenerator
 
-
 F = TypeVar("F", bound=Callable[..., BaseGenerator])
 
 
@@ -154,7 +153,7 @@ class DepthConstraint(Constraint):
                 raise ConstraintError(
                     f"with_depth: max depth ({self.max_val}) is too small for "
                     f"diameter ({diameter.min_val}-{diameter.max_val})",
-                    suggestion=f"Depth must be at least {min_depth_from_diameter} for this diameter",
+                    suggestion=f"Depth must be >= {min_depth_from_diameter} for this diameter",
                 )
 
     def apply(self, generator: BaseGenerator, context: dict[str, Any]) -> None:

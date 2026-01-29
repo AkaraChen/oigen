@@ -8,8 +8,8 @@ import pytest
 
 from oigen.errors import ConstraintError
 from oigen.generators import Int
-from oigen.generators.primitives import Char
 from oigen.generators.matrix import Matrix, MatrixData
+from oigen.generators.primitives import Char
 
 
 class TestMatrixData:

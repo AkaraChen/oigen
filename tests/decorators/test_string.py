@@ -4,19 +4,19 @@ Tests for oigen.decorators.string module.
 
 import pytest
 
-from oigen.errors import ConstraintError
-from oigen.generators.string import String
-from oigen.decorators.base import get_constraints, ConstraintRegistry
+from oigen.decorators.base import ConstraintRegistry, get_constraints
 from oigen.decorators.string import (
     CharsetConstraint,
-    TemplateConstraint,
     MustContainConstraint,
+    TemplateConstraint,
     TrieWordsConstraint,
+    as_trie_words,
     from_charset,
     from_template,
     must_contain,
-    as_trie_words,
 )
+from oigen.errors import ConstraintError
+from oigen.generators.string import String
 
 
 class TestCharsetConstraint:

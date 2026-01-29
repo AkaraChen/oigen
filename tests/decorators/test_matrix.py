@@ -4,32 +4,32 @@ Tests for oigen.decorators.matrix module.
 
 import pytest
 
+from oigen.decorators.base import ConstraintRegistry, get_constraints
+from oigen.decorators.matrix import (
+    BorderConstraint,
+    ColOperatorConstraint,
+    ColProductConstraint,
+    ColSumConstraint,
+    CoordConstraint,
+    MazeConstraint,
+    PathBetweenConstraint,
+    RowOperatorConstraint,
+    RowProductConstraint,
+    RowSumConstraint,
+    as_maze,
+    col_product_max,
+    col_sum_max,
+    row_product_max,
+    row_sum_max,
+    with_border,
+    with_col_operator,
+    with_coord_constraint,
+    with_path_between,
+    with_row_operator,
+)
 from oigen.errors import ConstraintError
 from oigen.generators import Int
 from oigen.generators.matrix import Matrix
-from oigen.decorators.base import get_constraints, ConstraintRegistry
-from oigen.decorators.matrix import (
-    MazeConstraint,
-    PathBetweenConstraint,
-    BorderConstraint,
-    CoordConstraint,
-    RowSumConstraint,
-    ColSumConstraint,
-    RowProductConstraint,
-    ColProductConstraint,
-    RowOperatorConstraint,
-    ColOperatorConstraint,
-    as_maze,
-    with_path_between,
-    with_border,
-    with_coord_constraint,
-    row_sum_max,
-    col_sum_max,
-    row_product_max,
-    col_product_max,
-    with_row_operator,
-    with_col_operator,
-)
 
 
 class TestMazeConstraint:
@@ -117,7 +117,8 @@ class TestCoordConstraint:
         assert "callable" in str(exc_info.value)
 
     def test_apply(self):
-        pred = lambda r, c, v: r + c < 5
+        def pred(r, c, v):
+            return r + c < 5
         c = CoordConstraint(predicate=pred)
         context = {}
         c.apply(Matrix(rows=5, cols=5, element=Int(1, 10)), context)
@@ -276,7 +277,8 @@ class TestDecoratorFunctions:
         assert registry.has(BorderConstraint)
 
     def test_with_coord_constraint(self):
-        pred = lambda r, c, v: r + c < 5
+        def pred(r, c, v):
+            return r + c < 5
 
         @with_coord_constraint(pred)
         def constrained():

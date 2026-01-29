@@ -3,21 +3,20 @@ Tests for oigen.decorators.base module.
 """
 
 from dataclasses import dataclass
-from random import Random
 from typing import Any
 
 import pytest
 
-from oigen.errors import ConstraintError
-from oigen.generators import BaseGenerator, Int
 from oigen.decorators.base import (
+    CONSTRAINT_REGISTRY_ATTR,
     Constraint,
     ConstraintRegistry,
+    add_constraint,
     constrained,
     get_constraints,
-    add_constraint,
-    CONSTRAINT_REGISTRY_ATTR,
 )
+from oigen.errors import ConstraintError
+from oigen.generators import BaseGenerator, Int
 
 
 # Test constraint implementation
@@ -28,7 +27,7 @@ class MockConstraint(Constraint):
 
     def validate(self, generator: BaseGenerator, registry: ConstraintRegistry) -> None:
         if self.value < 0:
-            raise ConstraintError(f"MockConstraint: value cannot be negative")
+            raise ConstraintError("MockConstraint: value cannot be negative")
 
     def apply(self, generator: BaseGenerator, context: dict[str, Any]) -> None:
         context[self.name] = self.value

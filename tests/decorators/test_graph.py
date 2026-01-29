@@ -4,30 +4,30 @@ Tests for oigen.decorators.graph module.
 
 import pytest
 
+from oigen.decorators.base import ConstraintRegistry, get_constraints
+from oigen.decorators.graph import (
+    CutVertexConstraint,
+    CycleConstraint,
+    DirectedConstraint,
+    GraphEdgeWeightConstraint,
+    GraphNodeWeightConstraint,
+    LongestPathConstraint,
+    MultiEdgesConstraint,
+    PathConstraint,
+    SelfLoopsConstraint,
+    allow_multi_edges,
+    allow_self_loops,
+    directed,
+    with_cut_vertex,
+    with_cycle,
+    with_edge_weight,
+    with_longest_path,
+    with_node_weight,
+    with_path,
+)
 from oigen.errors import ConstraintError
 from oigen.generators import Int
 from oigen.generators.graph import Graph
-from oigen.decorators.base import get_constraints, ConstraintRegistry
-from oigen.decorators.graph import (
-    DirectedConstraint,
-    GraphNodeWeightConstraint,
-    GraphEdgeWeightConstraint,
-    CycleConstraint,
-    PathConstraint,
-    CutVertexConstraint,
-    LongestPathConstraint,
-    SelfLoopsConstraint,
-    MultiEdgesConstraint,
-    directed,
-    with_node_weight,
-    with_edge_weight,
-    with_cycle,
-    with_path,
-    with_cut_vertex,
-    with_longest_path,
-    allow_self_loops,
-    allow_multi_edges,
-)
 
 
 class TestDirectedConstraint:

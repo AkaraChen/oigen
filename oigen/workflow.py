@@ -10,7 +10,6 @@ from oigen.errors import WorkflowError
 from oigen.generators import BaseGenerator
 from oigen.output import console
 
-
 # Type alias for formatter functions
 Formatter = Callable[[Any], str]
 

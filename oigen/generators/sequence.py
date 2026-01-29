@@ -61,7 +61,7 @@ class Sequence(BaseGenerator):
         else:
             raise ConstraintError(
                 f"Sequence: length must be int or tuple, got {type(self.length).__name__}",
-                suggestion="Use an integer for fixed length or tuple (min, max) for variable length",
+                suggestion="Use int for fixed length or tuple (min, max) for variable",
             )
 
     def generate(self, rng: Random) -> list[Any]:

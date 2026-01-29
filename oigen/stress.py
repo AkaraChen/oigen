@@ -7,7 +7,6 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from random import Random
-from typing import Any
 
 from oigen.errors import StressTestError
 from oigen.output import console

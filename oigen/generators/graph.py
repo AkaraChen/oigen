@@ -156,13 +156,7 @@ class Graph(BaseGenerator):
 
             if (u, v) not in edge_set:
                 edge_set.add((u, v))
-                # Store original order for directed, normalized for undirected
-                if self.directed:
-                    edges.append((rng.choice([u, v]) if u == v else (u, v) if rng.random() < 0.5 else (v, u)))
-                    # Actually we already have u, v in correct order, just append
-                    edges[-1] = (u, v)  # Fix: just use what we generated
-                else:
-                    edges.append((u, v))
+                edges.append((u, v))
 
         # Shuffle to randomize order
         rng.shuffle(edges)

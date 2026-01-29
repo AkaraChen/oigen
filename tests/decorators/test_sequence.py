@@ -4,17 +4,17 @@ Tests for oigen.decorators.sequence module.
 
 import pytest
 
-from oigen.errors import ConstraintError
-from oigen.generators import Int, Sequence
-from oigen.decorators.base import get_constraints, ConstraintRegistry
+from oigen.decorators.base import ConstraintRegistry, get_constraints
 from oigen.decorators.sequence import (
-    RelationConstraint,
     MonotonicConstraint,
     PrefixSumBoundedConstraint,
-    with_relation,
+    RelationConstraint,
     monotonic,
     prefix_sum_bounded,
+    with_relation,
 )
+from oigen.errors import ConstraintError
+from oigen.generators import Int, Sequence
 
 
 class TestRelationConstraint:
@@ -29,7 +29,8 @@ class TestRelationConstraint:
         assert "callable" in str(exc_info.value)
 
     def test_apply(self):
-        pred = lambda a, b: a < b
+        def pred(a, b):
+            return a < b
         c = RelationConstraint(predicate=pred)
         context = {}
         c.apply(Sequence(Int(1, 10), length=5), context)
@@ -100,7 +101,8 @@ class TestPrefixSumBoundedConstraint:
 
 class TestDecoratorFunctions:
     def test_with_relation(self):
-        pred = lambda a, b: abs(a - b) <= 5
+        def pred(a, b):
+            return abs(a - b) <= 5
 
         @with_relation(pred)
         def constrained():

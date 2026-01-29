@@ -42,10 +42,10 @@ class BaseGenerator(ABC):
 
 
 # Import all generators for convenient access
-from oigen.generators.primitives import Int, Double, Char, Bool
+from oigen.generators.graph import Graph
+from oigen.generators.primitives import Bool, Char, Double, Int
 from oigen.generators.sequence import Sequence
 from oigen.generators.tree import Tree
-from oigen.generators.graph import Graph
 
 __all__ = [
     "BaseGenerator",

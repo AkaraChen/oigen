@@ -5,11 +5,11 @@ Tests for oigen.errors module.
 import pytest
 
 from oigen.errors import (
-    OigenError,
     ConstraintError,
     GeneratorError,
-    WorkflowError,
+    OigenError,
     StressTestError,
+    WorkflowError,
 )
 
 

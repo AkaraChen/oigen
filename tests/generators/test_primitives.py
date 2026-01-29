@@ -8,7 +8,7 @@ from string import ascii_lowercase
 import pytest
 
 from oigen.errors import ConstraintError
-from oigen.generators.primitives import Int, Double, Char, Bool
+from oigen.generators.primitives import Bool, Char, Double, Int
 
 
 class TestInt:

@@ -9,7 +9,6 @@ from oigen.decorators.base import Constraint, ConstraintRegistry, add_constraint
 from oigen.errors import ConstraintError
 from oigen.generators import BaseGenerator
 
-
 F = TypeVar("F", bound=Callable[..., BaseGenerator])
 
 

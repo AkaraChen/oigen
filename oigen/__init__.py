@@ -29,84 +29,83 @@ With constraints:
 __version__ = "0.1.0"
 
 # Generators
-from oigen.generators import (
-    BaseGenerator,
-    Int,
-    Double,
-    Char,
-    Bool,
-    Sequence,
-    Tree,
-    Graph,
-)
-
-# New generators
-from oigen.generators.string import String, StringData
-from oigen.generators.matrix import Matrix, MatrixData
-
-# Data structures
-from oigen.generators.tree import TreeData
-from oigen.generators.graph import GraphData
-
-# Workflow
-from oigen.workflow import workflow, Workflow
-
-# Stress testing
-from oigen.stress import StressTest, StressResult
-
-# Errors
-from oigen.errors import (
-    OigenError,
-    ConstraintError,
-    GeneratorError,
-    WorkflowError,
-    StressTestError,
-)
-
-# Output utilities
-from oigen.output import (
-    console,
-    Verbosity,
-    set_verbosity,
-)
-
 # Constraint decorators
 from oigen.decorators import (
-    # Tree decorators
-    with_node_weight,
-    with_edge_weight,
-    with_diameter,
-    with_centroid,
-    with_depth,
+    allow_multi_edges,
+    allow_self_loops,
+    # Matrix decorators
+    as_maze,
+    as_trie_words,
+    col_product_max,
+    col_sum_max,
     # Graph decorators
     directed,
-    with_cycle,
-    with_path,
-    with_cut_vertex,
-    with_longest_path,
-    allow_self_loops,
-    allow_multi_edges,
-    # Sequence decorators
-    with_relation,
-    monotonic,
-    prefix_sum_bounded,
     # String decorators
     from_charset,
     from_template,
+    monotonic,
     must_contain,
-    as_trie_words,
-    # Matrix decorators
-    as_maze,
-    with_path_between,
-    with_border,
-    with_coord_constraint,
-    row_sum_max,
-    col_sum_max,
+    prefix_sum_bounded,
     row_product_max,
-    col_product_max,
-    with_row_operator,
+    row_sum_max,
+    with_border,
+    with_centroid,
     with_col_operator,
+    with_coord_constraint,
+    with_cut_vertex,
+    with_cycle,
+    with_depth,
+    with_diameter,
+    with_edge_weight,
+    with_longest_path,
+    # Tree decorators
+    with_node_weight,
+    with_path,
+    with_path_between,
+    # Sequence decorators
+    with_relation,
+    with_row_operator,
 )
+
+# Errors
+from oigen.errors import (
+    ConstraintError,
+    GeneratorError,
+    OigenError,
+    StressTestError,
+    WorkflowError,
+)
+from oigen.generators import (
+    BaseGenerator,
+    Bool,
+    Char,
+    Double,
+    Graph,
+    Int,
+    Sequence,
+    Tree,
+)
+from oigen.generators.graph import GraphData
+from oigen.generators.matrix import Matrix, MatrixData
+
+# New generators
+from oigen.generators.string import String, StringData
+
+# Data structures
+from oigen.generators.tree import TreeData
+
+# Output utilities
+from oigen.output import (
+    Verbosity,
+    console,
+    set_verbosity,
+)
+
+# Stress testing
+from oigen.stress import StressResult, StressTest
+
+# Workflow
+from oigen.workflow import Workflow, workflow
 
 __all__ = [
     # Version
