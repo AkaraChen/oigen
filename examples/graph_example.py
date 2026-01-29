@@ -4,13 +4,13 @@
 from oigen import workflow, Graph, Int
 
 
-@workflow
+@workflow()
 def graph_data():
     """Generate a random undirected graph."""
     return Graph(n=Int(5, 10), m=Int(5, 15))
 
 
-@workflow
+@workflow()
 def directed_graph_data():
     """Generate a random directed graph."""
     return Graph(n=Int(5, 10), m=Int(10, 20), directed=True)

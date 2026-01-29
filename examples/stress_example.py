@@ -10,7 +10,7 @@ std.cpp - correct solution:
     using namespace std;
     int main() {
         int n; cin >> n;
-        int sum = 0;
+        long long sum = 0;
         for (int i = 0; i < n; i++) {
             int x; cin >> x;
             sum += x;
@@ -34,24 +34,20 @@ hack.cpp - buggy solution (overflow for large values):
     }
 """
 
-from oigen import workflow, Sequence, Int, Dict, StressTest
+from oigen import workflow, Sequence, Int, StressTest
 
 
 def custom_formatter(data):
     """Format data as: n on first line, then n space-separated integers."""
-    n = data["n"]
-    arr = data["arr"]
-    return f"{n}\n{' '.join(str(x) for x in arr)}"
+    n = len(data)
+    return f"{n}\n{' '.join(str(x) for x in data)}"
 
 
 @workflow(formatter=custom_formatter)
 def sum_data():
     """Generate array sum test data."""
-    n = Int(1, 100)
-    return Dict({
-        "n": n,
-        "arr": Sequence(Int(1, 10**8), length=(10, 50)),  # Large values to trigger overflow
-    })
+    # Large values to trigger overflow
+    return Sequence(Int(1, 10**8), length=(10, 50))
 
 
 if __name__ == "__main__":
