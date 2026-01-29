@@ -4,7 +4,7 @@
 from oigen import workflow, Sequence, Int
 
 
-@workflow()
+@workflow
 def sequence_data():
     """Generate a sequence of random integers."""
     return Sequence(Int(1, 1000), length=(5, 20))

@@ -191,28 +191,15 @@ class TestWorkflow:
 
 
 class TestWorkflowDecorator:
-    def test_direct_call_with_generator(self):
-        gen = Int(1, 10)
-        wf = workflow(gen)
-        assert isinstance(wf, Workflow)
-        assert wf.generator is gen
+    def test_as_decorator_without_parentheses(self):
+        @workflow
+        def my_data():
+            return Int(1, 10)
 
-    def test_direct_call_with_options(self):
-        def custom_fmt(data):
-            return str(data)
+        assert isinstance(my_data, Workflow)
+        assert my_data.name == "my_data"
 
-        gen = Int(1, 10)
-        wf = workflow(gen, formatter=custom_fmt, name="test")
-        assert wf.formatter is custom_fmt
-        assert wf.name == "test"
-
-    def test_direct_call_with_non_generator_raises(self):
-        with pytest.raises(WorkflowError) as exc_info:
-            workflow(42)  # Not a generator
-        assert "expects a generator" in str(exc_info.value)
-
-    def test_as_decorator_without_args(self):
-        # Note: @workflow requires parentheses - use @workflow()
+    def test_as_decorator_with_parentheses(self):
         @workflow()
         def my_data():
             return Int(1, 10)

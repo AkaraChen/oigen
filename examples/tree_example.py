@@ -4,7 +4,7 @@
 from oigen import workflow, Tree, Int
 
 
-@workflow()
+@workflow
 def tree_data():
     """Generate a random tree with node values."""
     return Tree(n=Int(5, 15), node_value=Int(1, 100))

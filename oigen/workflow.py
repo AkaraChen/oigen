@@ -149,52 +149,43 @@ class Workflow:
 
 
 def workflow(
-    generator: BaseGenerator | None = None,
+    func: Callable[[], BaseGenerator] | None = None,
+    *,
     formatter: Formatter | None = None,
     name: str | None = None,
 ) -> Workflow | Callable[[Callable[[], BaseGenerator]], Workflow]:
-    """Decorator/factory for creating workflows.
+    """Decorator for creating workflows.
 
-    Can be used as a decorator or called directly:
-
-    As decorator:
+    Usage:
         @workflow
         def my_data():
             return Sequence(Int(1, 100), length=10)
 
-    As decorator with options:
         @workflow(formatter=my_formatter, name="my_data")
         def my_data():
             return Sequence(Int(1, 100), length=10)
 
-    Direct call:
-        wf = workflow(Sequence(Int(1, 100), length=10))
-
     Args:
-        generator: Root generator (for direct call).
+        func: The decorated function (auto-filled by Python).
         formatter: Optional custom formatter.
         name: Optional workflow name.
 
     Returns:
-        Workflow instance or decorator function.
+        Workflow instance.
     """
-    # Direct call with generator
-    if generator is not None:
-        if not isinstance(generator, BaseGenerator):
-            raise WorkflowError(
-                f"workflow() expects a generator, got {type(generator).__name__}",
-                suggestion="Pass a generator like Sequence(), Tree(), or Graph()",
-            )
-        return Workflow(generator, formatter=formatter, name=name)
 
-    # Used as decorator
-    def decorator(func: Callable[[], BaseGenerator]) -> Workflow:
-        gen = func()
+    def make_workflow(f: Callable[[], BaseGenerator]) -> Workflow:
+        gen = f()
         if not isinstance(gen, BaseGenerator):
             raise WorkflowError(
                 f"Workflow function must return a generator, got {type(gen).__name__}",
                 suggestion="Return a generator like Sequence(), Tree(), or Graph()",
             )
-        return Workflow(gen, formatter=formatter, name=name or func.__name__)
+        return Workflow(gen, formatter=formatter, name=name or f.__name__)
 
-    return decorator
+    # @workflow without parentheses
+    if func is not None:
+        return make_workflow(func)
+
+    # @workflow() with parentheses
+    return make_workflow
